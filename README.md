@@ -4,6 +4,11 @@ Theme inspired by Medium website and some Tiktok features.
 
 The theme is completely free and free to be used, in the next few weeks I will be making some improvements.
 
+The theme is composed of:
+
+Bootstrap CSS library
+Google font family
+
 You can find a demo version: [Medium](https://wizate.com/demo/medium/)
 
 Find more information at [Wizate](https://wizate.com/)
