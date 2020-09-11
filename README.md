@@ -1,1 +1,1 @@
-# wizate-medium
+# Wizate Medium
