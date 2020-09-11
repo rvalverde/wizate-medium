@@ -6,8 +6,9 @@ The theme is completely free and free to be used, in the next few weeks I will b
 
 The theme is composed of:
 
-- Bootstrap CSS library
-- Google font family
+- CSS library by Bootstrap
+- Font family by Google Fonts
+- Icons by Iconmonstr
 
 You can find a demo version: [Medium](https://wizate.com/demo/medium/)
 
