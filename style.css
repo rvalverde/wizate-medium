@@ -334,8 +334,6 @@ blockquote {
 }
 
 .header-search {
-  border-radius: 5px;
-  border: 1px solid #eee;
   display: flex;
   align-items: center;
   padding: 1px 10px;
@@ -346,6 +344,35 @@ blockquote {
   background-color: transparent;
   border: none;
   padding: 0;
+}
+
+.header-search input {
+  display: none;
+}
+
+@media (min-width: 991px) {
+  .header-search {
+    border-radius: 5px;
+    border: 1px solid #eee;
+  }
+
+  .header-search input {
+    display: block;
+  }
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+@media (min-width: 991px) {
+  .float-md-none {
+    float: none;
+  }
 }
 
 .small {

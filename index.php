@@ -60,8 +60,17 @@ get_header(); ?>
               <?php $i=0; while (have_posts()) : the_post(); ?>
                 <?php if ($i > 1 ) : ?>
 
-                  <div class="d-flex my-4">
-                    <div class="pr-4">
+                  <div class="d-md-flex flex-row-reverse my-4">
+
+                    <?php $imagen = wp_get_attachment_image_src( get_post_thumbnail_id(), 'thumbnail' ); if( $imagen ) : ?>
+                      <div class="float-right float-md-none ml-4 ml-md-3">
+                        <a href="<?php the_permalink() ?>" rel="bookmark">
+                          <img src="<?php echo $imagen[0]; ?>" width="150" alt="<?php the_title(); ?>" />
+                        </a>
+                      </div>
+                    <?php endif; ?>
+
+                    <div class="">
                       <div class="text-uppercase mb-1 small">
                         <span class="small text-gray-200">Posted in <?php the_category(', ') ?></span>
                       </div>
@@ -95,13 +104,6 @@ get_header(); ?>
                       </div>
                     </div>
 
-                    <?php $imagen = wp_get_attachment_image_src( get_post_thumbnail_id(), 'thumbnail' ); if( $imagen ) : ?>
-                      <div class="mb-3">
-                        <a href="<?php the_permalink() ?>" rel="bookmark">
-                          <img src="<?php echo $imagen[0]; ?>" width="150" alt="<?php the_title(); ?>" />
-                        </a>
-                      </div>
-                    <?php endif; ?>
                   </div>
 
                 <?php endif; ?>
