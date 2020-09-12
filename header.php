@@ -37,13 +37,13 @@
             </a>
           </div>
 
-          <div class="header-search">
-            <i class="icon-search"></i>
-            <form role="search" action="<?php echo get_option('home'); ?>/" method="get">
+          <form role="search" action="<?php echo get_option('home'); ?>/" method="get">
+            <div class="header-search">
               <label for="search-form" class="d-none"><?php echo _x( 'Search for:', 'label' ) ?></label>
               <input type="text" name="s" id="search-form" value="<?php the_search_query(); ?>" />
-            </form>
-          </div>
+              <button type="submit"><i class="icon-search"></i></button>
+            </div>
+          </form>
         </div>
       </div>
     </header>

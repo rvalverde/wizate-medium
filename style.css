@@ -5,6 +5,7 @@ Description: Design inspired by Medium and Tiktok with quite an emphasis on user
 Author: Wizate
 Author URI: https://wizate.com/
 Theme URI: https://wizate.com/demo/medium/
+Tags: medium theme, simple theme, white blog, one-column
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -330,6 +331,21 @@ blockquote {
   background-color: rgba(255, 255, 255, 1);
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
   width: 100%;
+}
+
+.header-search {
+  border-radius: 5px;
+  border: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  padding: 1px 10px;
+}
+
+.header-search input,
+.header-search button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
 }
 
 .small {
