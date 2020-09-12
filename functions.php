@@ -81,6 +81,9 @@
     
   function wizate_enqueue_custom_js() {
     wp_enqueue_script('wizate-medium', get_stylesheet_directory_uri().'/js/wizate-medium.js', array(), true, true);
+
+    if ( is_singular() )
+      wp_enqueue_script('wizate-ajax', get_stylesheet_directory_uri().'/js/wizate-ajax.js', array(), true, true);
   }
   add_action('wp_enqueue_scripts', 'wizate_enqueue_custom_js');
 
@@ -94,7 +97,7 @@
 
 
   function wizate_script_head() {
-    if ( is_single() ) {
+    if ( is_singular() ) {
       ?>
         <script type='text/javascript'>
           /* <![CDATA[ */
@@ -113,6 +116,7 @@
               "action": "wizate_shares",
               "share_count": <?php echo get_post_meta(get_the_ID(), 'wizate_shares', true); ?>
             };
+            
           /* ]]> */
         </script>
       <?php

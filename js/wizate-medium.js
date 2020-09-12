@@ -33,16 +33,44 @@ function modalShare(url) {
 
 jQuery(document).ready(function ($) {
 
+  function comment_open_resize() {
+    const width = $(window).width();
+    const comments = $(".comments");
+
+    if (width >= 991) {
+      comments.stop(true, true).animate({
+        width: "toggle"
+      }, 400);
+    } else {
+      comments.stop(true, true).slideDown(400);
+    }
+  }
+
+  function comment_close_resize() {
+    const width = $(window).width();
+    const comments = $(".comments");
+
+    if (width >= 991) {
+      comments.animate({
+        width: "toggle"
+      }, 400);
+    } else {
+      comments.stop(true, true).slideUp();
+    }
+  }
+
   function open_comment() {
     const body = $("body");
-    const comments = $(".comments");
     const scroll = "scroll-hidden";
     const active = "comments-active";
 
     body.removeClass(scroll).addClass(active);
-    comments.stop(true, true).animate({
-      width: "toggle"
-    }, 400);
+
+    comment_open_resize();
+
+    $(window).resize(function () {
+      comment_open_resize();
+    });
 
     if (body.hasClass(active)) {
       body.addClass(scroll);
@@ -54,35 +82,40 @@ jQuery(document).ready(function ($) {
     const comments = $(".comments");
 
     body.removeClass("scroll-hidden comments-active");
-    comments.animate({
-      width: "toggle"
-    }, 400);
+
+    comment_close_resize();
+
+    $(window).resize(function () {
+      comment_close_resize();
+    });
+
   }
 
-  const offset = $(".content").offset().top - 400;
-  const footer = $(".taxonomy").offset().top - 800;
+  const offset = $(".content");
+  const footer = $(".taxonomy");
   const comments = $(".click-comments");
   const comments_close = $(".comments-close");
   const share = $(".click-share");
   const share_close = $(".share-close");
   const copied = $(".click-copied");
-  const like = $('.click-like');
-  const social = $('.click-social');
-  const social_count = $('.social-count');
 
-  let clicked = 0;
+  if (offset.length && footer.length) {
 
-  $(window).scroll(function () {
-    const share_fixed = $(".options");
+    const scroll_top = offset.offset().top - 400;
+    const scroll_bottom = footer.offset().top - 800;
 
-    if ($(this).scrollTop() > footer) {
-      share_fixed.fadeOut(100);
-    } else if ($(this).scrollTop() > offset) {
-      share_fixed.fadeIn(400);
-    } else {
-      share_fixed.fadeOut(100);
-    }
-  });
+    $(window).scroll(function () {
+      const share_fixed = $(".options");
+
+      if ($(this).scrollTop() > scroll_bottom) {
+        share_fixed.fadeOut(100);
+      } else if ($(this).scrollTop() > scroll_top) {
+        share_fixed.fadeIn(400);
+      } else {
+        share_fixed.fadeOut(100);
+      }
+    });
+  }
 
   comments.on("click", function () {
     open_comment();
@@ -124,76 +157,6 @@ jQuery(document).ready(function ($) {
     temp.val(url).select();
     document.execCommand("copy");
     temp.remove();
-  });
-
-  /* 
-    Data View 
-  */
-  $.ajax({
-    type: "post",
-    url: post_ajax,
-    data: {
-      action: post_view.action,
-      post_id: post_id,
-      count: post_view.view_count,
-      _wpnonce: post_nonce
-    },
-    success: function (data) {},
-    error: function (data) {}
-  });
-
-  /* 
-    Data Like 
-  */
-  like.next('span').text(post_like.like_count);
-  like.on("click", function () {
-    clicked++;
-
-    const like_count = ".like-count";
-
-    if (clicked <= 10) {
-      $(this).find(like_count).addClass('active').text(clicked);
-
-      $.ajax({
-        type: "POST",
-        url: post_ajax,
-        data: {
-          action: post_like.action,
-          post_id: post_id,
-          count: post_like.like_count,
-          _wpnonce: post_nonce
-        },
-        success: function (response) {
-          like.addClass('active').next('span').text(response);
-
-          setTimeout(function () {
-            like.find(like_count).removeClass('active');
-          }, 2500);
-        },
-        error: function (response) {}
-      });
-    }
-  });
-
-  /* 
-    Data Social 
-  */
-  social_count.text(post_share.share_count);
-  social.on("click", function () {
-    $.ajax({
-      type: "POST",
-      url: post_ajax,
-      data: {
-        action: post_share.action,
-        post_id: post_id,
-        count: post_share.share_count,
-        _wpnonce: post_nonce
-      },
-      success: function (response) {
-        social_count.text(response);
-      },
-      error: function (response) {}
-    });
   });
 
 });

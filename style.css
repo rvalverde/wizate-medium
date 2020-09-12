@@ -559,13 +559,26 @@ blockquote {
   position: fixed;
   right: 0;
   top: 0;
-  width: 37vw;
+  width: 100vw;
   z-index: 11;
 }
 
+@media (min-width: 991px) {
+  .comments {
+    width: 37vw;
+  }
+}
+
 .comments-wrapper {
-  padding: 1.5rem 2rem;
-  width: 37vw;
+  padding: 1.125rem;
+  width: 100vw;
+}
+
+@media (min-width: 991px) {
+  .comments-wrapper {
+    padding: 1.5rem 2rem;
+    width: 37vw;
+  }
 }
 
 .comments a:hover {
@@ -660,8 +673,17 @@ body.admin-bar {
 }
 
 body.admin-bar .comments {
-  height: calc(100% - 32px);
-  top: 32px;
+  height: 80vh;
+  bottom: 0;
+  top: auto;
+}
+
+@media (min-width: 991px) {
+  body.admin-bar .comments {
+    height: calc(100% - 32px);
+    bottom: auto;
+    top: 32px;
+  }
 }
 
 .click-like {
